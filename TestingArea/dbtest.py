@@ -10,20 +10,23 @@ c=conn.cursor()
 try:
     c.execute('''CREATE TABLE stocks
                  (date text, trans text, symbol text, qty real, price real)''')
-    c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
+
 except:
     print("table already exists")
 a=True
-
-while a:
-    c.execute("INSERT INTO stocks VALUES ('"+raw_input("enterDate")+"',"
-                                   "'"+raw_input("BUY/SELL")+","
-                                  "'"+raw_input("enterSymbol")+","
-              "'666+,"
-              "'6666)")
-                                 #"'"+int(raw_input("enterQty"))+","
-                                #"'"+int(raw_input("enterPrice"))+")")
+c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
+while a == True:
+    c.execute("INSERT INTO stocks VALUES ('"+raw_input("enterDate") + "',"
+                                      "'"+raw_input("BUY/SELL") + "',"
+                                      "'"+raw_input("enterSymbol") + "',"
+                                      ""+raw_input("enterSymbol") + ","
+                                      ""+raw_input("enterSymbol") + ")")
+                                 # "'"+int(raw_input("enterQty"))+","
+                                # "'"+int(raw_input("enterPrice"))+")")
     a=raw_input("contiue?")
+conn.commit()
+
 for row in c.execute('SELECT * FROM stocks ORDER BY price'):
         print row
 print("end")
+conn.close()
