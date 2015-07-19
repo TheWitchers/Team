@@ -1,5 +1,5 @@
 __author__ = 'dvir'
-# from PaymentInfos import PaymentInfo
+from PaymentInfos import PaymentInfo
 class Purchases:
     def __init__(self, app_id, deal_num, product_name, buyer, deal_date, payment_info):
         self.app_id = app_id
