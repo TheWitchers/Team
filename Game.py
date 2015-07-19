@@ -1,11 +1,17 @@
 __author__ = 'dvir'
 import datetime
 class Game:
-    def __init__(self, App_ID, Product_Name, Developer, Release_Date, Download_Link):
+    def __init__(self, App_ID, Product_Name, Developer, price, Release_Date, tags, description, min_system, rate, times_rated,  Download_Link):
         self.app_id = App_ID
         self.product_name=Product_Name
         self.developer = Developer
+        self.price = price
         self.release_date = Release_Date
+        self.tags = tags
+        self.description = description
+        self.min_system = min_system
+        self.rate = rate
+        self.times_rated = times_rated
         self.available = True
         self.download_link = Download_Link
 
