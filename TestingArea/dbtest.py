@@ -16,13 +16,12 @@ except:
 a=True
 c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
 while a == True:
-    c.execute("INSERT INTO stocks VALUES ('"+raw_input("enterDate") + "',"
+    c.execute("INSERT INTO stocks VALUES ('"+str(datetime.date.today()) + "',"
                                       "'"+raw_input("BUY/SELL") + "',"
                                       "'"+raw_input("enterSymbol") + "',"
-                                      ""+raw_input("enterSymbol") + ","
-                                      ""+raw_input("enterSymbol") + ")")
-                                 # "'"+int(raw_input("enterQty"))+","
-                                # "'"+int(raw_input("enterPrice"))+")")
+                                      ""+raw_input("enterQty") + ","
+                                      ""+raw_input("enterPrice") + ")")
+
     a=raw_input("contiue?")
 conn.commit()
 
