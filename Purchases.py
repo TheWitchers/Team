@@ -44,3 +44,4 @@ class Purchases:
 
     def set_payment_info(self, info):
         self.payment_info= info
+

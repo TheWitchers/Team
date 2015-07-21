@@ -24,7 +24,8 @@ class UserDetails:
         #         payment info: (still in progress)
         #
         #         """ % (self.nickname, self.first_name, self.last_name, self.age, self.phone, self.email, self.birthdate)
-        # another option is returning a list or a tuple
+
+        # another option is returning a list or a tuple-like string
         # return str([self.nickname, self.first_name, self.last_name, self.age, self.phone, self.email, self.birthdate])
         # return str((self.nickname, self.first_name, self.last_name, self.age, self.phone, self.email, self.birthdate))
         pass
