@@ -13,5 +13,19 @@ class UserDetails:
         self.payment_info = payment_info
 
     def __repr__(self):
+        # return """
+        #         nickname: %s
+        #         first name: %s
+        #         last name: %s
+        #         age: %s
+        #         phone: %s
+        #         email: %s
+        #         birthdate: %s
+        #         payment info: (still in progress)
+        #
+        #         """ % (self.nickname, self.first_name, self.last_name, self.age, self.phone, self.email, self.birthdate)
+        # another option is returning a list or a tuple
+        # return str([self.nickname, self.first_name, self.last_name, self.age, self.phone, self.email, self.birthdate])
+        # return str((self.nickname, self.first_name, self.last_name, self.age, self.phone, self.email, self.birthdate))
         pass
         # TODO: Implement this method.
