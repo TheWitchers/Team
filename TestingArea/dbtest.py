@@ -14,23 +14,25 @@ try:
 except:
     print("table already exists")
 a=True
-c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
-while a == True:
-    c.execute("INSERT INTO stocks VALUES ('"+str(datetime.date.today()) + "',"
-                                      "'"+raw_input("BUY/SELL: ") + "',"
-                                      "'"+raw_input("enterSymbol: ") + "',"
-                                      ""+raw_input("enterQty: ") + ","
-                                      ""+raw_input("enterPrice: ") + ")")
+# c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
+# while a == True:
+#     c.execute("INSERT INTO stocks VALUES ('"+str(datetime.date.today()) + "',"
+#                                       "'"+raw_input("BUY/SELL: ") + "',"
+#                                       "'"+raw_input("enterSymbol: ") + "',"
+#                                       ""+raw_input("enterQty: ") + ","
+#                                       ""+raw_input("enterPrice: ") + ")")
 
-    a=raw_input("contiue?")
+    # a=raw_input("contiue?")
 conn.commit()
 def show_purch(price):
     l = []
-    for row in c.execute("SELECT 'symbol text' FROM stocks WHERE price > " + str(price) + ""):
-        l.append(row)
-    l
-show_purch(100)
-for row in c.execute('SELECT * FROM stocks ORDER BY price'):
+    for row in c.execute("SELECT symbol FROM stocks WHERE price = " + str(price) + ""):
         print row
-print("end")
+        l.append(row)
+    print l
+    return l
+show_purch(raw_input("enterPrice: ") )
+# for row in c.execute('SELECT * FROM stocks ORDER BY price'):
+#         print row
+# print("end")
 conn.close()
