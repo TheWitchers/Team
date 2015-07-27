@@ -27,7 +27,7 @@ conn.commit()
 
 def show_purch(price):
     l = []
-    for row in c.execute("SELECT symbol FROM stocks WHERE price = " + str(price) + ""):
+    for row in c.execute("SELECT * FROM stocks WHERE price = " + str(price) + ""):
         print row
         l.append(row)
     print l
