@@ -1,5 +1,6 @@
 __author__ = 'dvir'
-import datetime
+
+
 class Game:
     def __init__(self, App_ID, Product_Name, Developer, price, Release_Date, tags, description, min_system, rate, times_rated,  Download_Link):
         self.app_id = App_ID
