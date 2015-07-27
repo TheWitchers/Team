@@ -8,9 +8,10 @@ c = conn.cursor()
 
 def has_inf(col, tbl, info):
     if len(c.execute(
-                                                                                            "SELECT '" + col + "' FROM '" + tbl + "' WHERE username = '" + id + "' AND '" + col + "' = '" + info + "'")) > 0:
+         "SELECT '" + col + "' FROM '" + tbl + "' WHERE '"+col+"' = '" + id + "' AND '" + col + "' = '" + info + "'")) > 0:
         print col + " already exists"
         return True
     else:
         print col + " is OK"
         return False
+
