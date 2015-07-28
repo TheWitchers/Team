@@ -22,7 +22,8 @@ a = True
 #                                       ""+raw_input("enterPrice: ") + ")")
 
 # a=raw_input("contiue?")
-conn.commit()
+
+# conn.commit()
 
 
 def show_purch(price):
@@ -31,6 +32,8 @@ def show_purch(price):
         print row
         l.append(row)
     print l
+    a = c.execute("SELECT * FROM stocks WHERE price = " + str(price) + "")
+    print a
     return l
 
 
