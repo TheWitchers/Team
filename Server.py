@@ -1,7 +1,7 @@
 __author__ = 'yagel'
 
 
-# from * import *
+from Credentials import *
 # from utils import strip_message
 
 
@@ -13,7 +13,7 @@ def example(connection, data):
     pass
 
 
-funcs = {"100": example}
+funcs = {"100": register}
 
 
 def server(connection):
