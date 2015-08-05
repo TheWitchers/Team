@@ -1,9 +1,10 @@
 __author__ = 'dvir'
 
-from dvir_methods_suggs import *
 import socket
 import ssl
 import pprint
+
+from dvir_methods_suggs import *
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -18,20 +19,25 @@ ssl_sock.cipher()
 pprint.pformat(ssl_sock.getpeercert())
 
 # 100
-def  register(use, pas, email, fname, lname, nick, ver, ans):
-    l=[use, pas, email, fname, lname, nick, ver, ans]
+def register(use, pas, email, fname, lname, nick, ver, ans):
+    l = [use, pas, email, fname, lname, nick, ver, ans]
     ssl_sock.write(l)
+
+
 # 101
 def register_check(l=[]):
     if not has_inf("username", l[0]) and not has_inf("email", l[2]) and not has_inf("nickname", l[5]):
         c.execute(
-            "INSERT INTO Users VALUES ('" + l[5] + "','" + l[2] + "','" + l[3] + "','" + l[4] + "','" + l[0] + "','" + l[1] + "', False,'" + l[6] + "','" + l[7] + "')")
+            "INSERT INTO Users VALUES ('" + l[5] + "','" + l[2] + "','" + l[3] + "','" + l[4] + "','" + l[0] + "','" +
+            l[1] + "', False,'" + l[6] + "','" + l[7] + "')")
         ssl_sock.write(True)
     else:
         ssl_sock.write(False)
+
+
 # 102
-def login(use,pas):
-    l = [use,pas]
+def login(use, pas):
+    l = [use, pas]
     ssl_sock.write(l)
 
 
@@ -44,9 +50,8 @@ def login_check(use, pas):
             l.append(row[4])
             l.append(row[5])
         if len(l) > 0:
-            # TODO: instead of l[], will be session cookie
+            # TODO: understand better what is session cookie and how to use it
+            # TODO: instead of l[] (list), will be session cookie
             ssl_sock.write(l)
     else:
-        return "such user does not exist"
-
-
+        ssl_sock.write("such user does not exist")
