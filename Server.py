@@ -13,7 +13,7 @@ def example(connection, data):
     pass
 
 
-funcs = {"100": register(),"101": register_check(), "102": login()}
+funcs = {"100": register(), "101": register_check(), "102": login(), "103": login_check(),"104": forgot_pas(),"105": ver_question()}
 
 
 def server(connection):
