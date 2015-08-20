@@ -25,7 +25,8 @@ def register(use, pas, email, fname, lname, nick, ver, ans):
 
 
 # 101-server
-def register_check(l=[]):
+def register_check():
+    l=[]
     if not has_inf("username", l[0]) and not has_inf("email", l[2]) and not has_inf("nickname", l[5]):
         c.execute(
             "INSERT INTO Users VALUES ('" + l[5] + "','" + l[2] + "','" + l[3] + "','" + l[4] + "','" + l[0] + "','" +
@@ -36,8 +37,9 @@ def register_check(l=[]):
 
 # 102-client
 def login(use, pas):
-    l = [use, pas]
+    l = [102, use, pas]
     ssl_sock.write(l)
+    # ssl_sock.write("102|"+use+"|"+pas)
 
 # 103-server
 def login_check(use, pas):
