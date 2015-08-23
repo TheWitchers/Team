@@ -1,7 +1,20 @@
 __author__ = 'dvir'
 
 from Credentials import *
-
+import pprint
+#
+# s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#
+# ssl_sock = ssl.wrap_socket(s,
+#                            ca_certs="C:\Users\dvir\PycharmProjects\Team\TestingArea\server.crt",
+#                            cert_reqs=ssl.CERT_REQUIRED)
+#
+# ssl_sock.connect(('127.0.0.1', 4567))
+#
+# repr(ssl_sock.getpeername())
+# ssl_sock.cipher()
+# pprint.pformat(ssl_sock.getpeercert())
+#
 
 def menu():
     print ("What do you want to do?\n"
@@ -11,7 +24,8 @@ def menu():
 
     b = raw_input()
     if b == 1:
-        register(raw_input("Enter username: "),
+        register(ssl_sock,
+                 raw_input("Enter username: "),
                  raw_input("Enter password: "),
                  raw_input("Enter email: "),
                  raw_input("Enter first name: "),
@@ -20,7 +34,8 @@ def menu():
                  raw_input("Enter verification question: "),
                  raw_input("Enter answer: "))
     elif b == 2:
-        login(raw_input("Enter username: "),
+        login(ssl_sock,
+              raw_input("Enter username: "),
               raw_input("Enter password: "))
 
 

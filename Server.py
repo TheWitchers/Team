@@ -1,14 +1,27 @@
 __author__ = 'yagel'
 
 from Credentials import *
+import re
 # from utils import strip_message
+
+bindsocket = socket.socket()
+bindsocket.bind(('127.0.0.1', 4567))
+bindsocket.listen(10)
+
+newsocket, fromaddr = bindsocket.accept()
+ssl_sock = ssl.wrap_socket(newsocket,
+                           server_side=True,
+                           certfile="C:\Users\dvir\PycharmProjects\Team\TestingArea\server.crt",
+                           keyfile="C:\Users\dvir\PycharmProjects\Team\TestingArea\server.key")
+
+data = ssl_sock.read()
 
 # divides the data to message code and actual data
 def strip_message(data):
-    l=[]
-    for info in range(1, len(data)):
-        l.append(info)
-    return data[0],l
+    l=re.split('[|]',data)
+    code = l[0]
+    l.remove(l[0])
+    return code,l
 
 def mc_handling(mc):
     chain_func={"100":"101","102":"103"}
