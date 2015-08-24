@@ -2,6 +2,8 @@ __author__ = 'yagel'
 
 from Credentials import *
 import re
+import socket, ssl
+
 # from utils import strip_message
 
 bindsocket = socket.socket()
@@ -27,13 +29,10 @@ def mc_handling(mc):
     chain_func={"100":"101","102":"103"}
     return chain_func[mc]
 
-
 def example(connection, data):
     pass
 
-
-funcs = {"100": register(), "101": register_check(), "102": login(), "103": login_check(),"104": forgot_pas(),"105": ver_question()}
-
+funcs = {"100": register, "101": register_check, "102": login, "103": login_check,"104": forgot_pas,"105": ver_question}
 
 def server(connection):
     while True:
@@ -46,3 +45,4 @@ def server(connection):
             connection.close()
             # close_thread()
             break
+server(ssl_sock)

@@ -1,7 +1,7 @@
 __author__ = 'dvir'
 
 from Credentials import *
-import pprint
+import pprint, socket, ssl
 #
 # s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #
@@ -22,7 +22,7 @@ def menu():
            "    1. Register\n"
            "    2. Login\n")
 
-    b = raw_input()
+    b = input()
     if b == 1:
         register(ssl_sock,
                  raw_input("Enter username: "),
@@ -49,12 +49,13 @@ print repr(ssl_sock.getpeername())
 print ssl_sock.cipher()
 print pprint.pformat(ssl_sock.getpeercert())
 
-ssl_sock.write(raw_input("Enter username: "))
-
+# ssl_sock.write(raw_input("Enter username: "))
+menu()
 while True:
     a = ssl_sock.read()
     print a
-    menu()
+
+
 
     if a != "":
         break

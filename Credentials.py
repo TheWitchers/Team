@@ -1,7 +1,5 @@
 __author__ = 'dvir'
 
-import socket
-import ssl
 import time
 
 from dvir_methods_suggs import *
@@ -10,12 +8,12 @@ from dvir_methods_suggs import *
 
 # 100-client
 def register(ssl_sock, use, pas, email, fname, lname, nick, ver, ans):
-    l = [use, pas, email, fname, lname, nick, ver, ans]
+    l = use + "|" + pas + "|" + email + "|" + fname + "|" + lname + "|" + nick + "|" + ver + "|" + ans
     ssl_sock.write(l)
 
 
 # 101-server
-def register_check(ssl_sock,):
+def register_check(ssl_sock, ):
     l = []
     if not has_inf("username", l[0]) and not has_inf("email", l[2]) and not has_inf("nickname", l[5]):
         c.execute(
@@ -27,14 +25,14 @@ def register_check(ssl_sock,):
 
 
 # 102-client
-def login(ssl_sock,use, pas):
-    l = [102, use, pas]
-    ssl_sock.write(l)
-    # ssl_sock.write("102|"+use+"|"+pas)
+def login(ssl_sock, use, pas):
+    # l = [102, use, pas]
+    # ssl_sock.write(l)
+    ssl_sock.write("102|" + use + "|" + pas)
 
 
 # 103-server
-def login_check(ssl_sock,use, pas):
+def login_check(ssl_sock, use, pas):
     if has_inf("username", use):
         conn = sqlite3.connect("C:\Users\dvir\PycharmProjects\Team\DataBase\TeamDB.db")
         c = conn.cursor()
@@ -48,15 +46,15 @@ def login_check(ssl_sock,use, pas):
             ssl_sock.write(
                 "Username: " + use + "\r\n" + "password: " + pas + "\r\n " + time.strftime("%d/%m/%Y %H:%M:%S"))
     else:
-        ssl_sock.write("such user does not exist")
+        ssl_sock.write("103|902")
 
 
 # 104-client
-def forgot_pas(ssl_sock,use):
+def forgot_pas(ssl_sock, use):
     ssl_sock.write([use, 104])
 
 
 # 105-server
-def ver_question(ssl_sock,use):
+def ver_question(ssl_sock, use):
     q = c.execute("SELECT VerificationQuestion FROM Users WHERE username = '" + use + "'")
     ssl_sock.write(q)
