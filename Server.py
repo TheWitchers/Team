@@ -2,7 +2,7 @@ __author__ = 'yagel'
 
 from Credentials import *
 import re
-import socket, ssl
+import socket, ssl, sys
 
 # from utils import strip_message
 
@@ -16,13 +16,14 @@ ssl_sock = ssl.wrap_socket(newsocket,
                            certfile="C:\Users\dvir\PycharmProjects\Team\TestingArea\server.crt",
                            keyfile="C:\Users\dvir\PycharmProjects\Team\TestingArea\server.key")
 
-data = ssl_sock.read()
+#data = ssl_sock.read()
 
 # divides the data to message code and actual data
 def strip_message(data):
     l=re.split('[|]',data)
     code = l[0]
     l.remove(l[0])
+    l = l[0]+"|"+l[1]
     return code,l
 
 def mc_handling(mc):
@@ -39,9 +40,11 @@ def server(connection):
         try:
             data = connection.recv(4096)
             mc, data = strip_message(data)
-            funcs[mc](connection, data)
-            funcs[mc_handling(mc)](data)
+            # funcs[mc](ssl_sock, data)
+            funcs[mc_handling(mc)](ssl_sock, data)
+
         except:
+            print "Unexpected error:", sys.exc_info()[0]
             connection.close()
             # close_thread()
             break

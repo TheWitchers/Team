@@ -1,6 +1,6 @@
 __author__ = 'dvir'
 
-import time
+import time, re
 
 from dvir_methods_suggs import *
 
@@ -32,7 +32,10 @@ def login(ssl_sock, use, pas):
 
 
 # 103-server
-def login_check(ssl_sock, use, pas):
+def login_check(ssl_sock, info):
+    b = re.split('[|]',info)
+    use = b[0]
+    pas = b[1]
     if has_inf("username", use):
         conn = sqlite3.connect("C:\Users\dvir\PycharmProjects\Team\DataBase\TeamDB.db")
         c = conn.cursor()
