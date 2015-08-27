@@ -2,9 +2,10 @@ __author__ = 'dvir'
 
 
 class Game:
-    def __init__(self, App_ID, Product_Name, Developer, price, Release_Date, tags, description, min_system, rate, times_rated,  Download_Link):
+    def __init__(self, App_ID, Product_Name, Developer, price, Release_Date, tags, description, min_system, rate,
+                 times_rated, Download_Link):
         self.app_id = App_ID
-        self.product_name=Product_Name
+        self.product_name = Product_Name
         self.developer = Developer
         self.price = price
         self.release_date = Release_Date
@@ -26,13 +27,13 @@ class Game:
         return self.product_name
 
     def set_product_name(self, name):
-        self.product_name=name
+        self.product_name = name
 
     def get_developer(self):
         return self.developer
 
     def set_developer(self, dev):
-        self.developer =dev
+        self.developer = dev
 
     def get_release_date(self):
         return self.release_date

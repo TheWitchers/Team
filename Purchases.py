@@ -1,5 +1,6 @@
 __author__ = 'dvir'
-from PaymentInfos import PaymentInfo
+
+
 class Purchases:
     def __init__(self, app_id, deal_num, product_name, buyer, deal_date, payment_info):
         self.app_id = app_id
@@ -31,17 +32,16 @@ class Purchases:
         return self.buyer
 
     def set_buyer(self, buyer):
-        self.buyer=buyer
+        self.buyer = buyer
 
     def get_deal_date(self):
         return self.deal_date
 
-    def set_deal_date(self,date):
-        self.deal_date=date
+    def set_deal_date(self, date):
+        self.deal_date = date
 
     def get_payment_info(self):
         return self.payment_info
 
     def set_payment_info(self, info):
         self.payment_info = info
-
