@@ -1,9 +1,8 @@
 __author__ = 'dvir'
 import sqlite3
-import tkFileDialog
-#a = tkFileDialog.askopenfilename()
+# a = tkFileDialog.askopenfilename()
 conn = sqlite3.connect("C:/Users/dvir/PycharmProjects/Team/DataBase/TeamDB.db")
-#print a
+# print a
 c = conn.cursor()
 
 a = "y"
@@ -22,7 +21,7 @@ while a == "y":
     # c.execute("INSERT INTO 'Users' VALUES ('dvirking', 'dviryamin@gmail.com', 'dvir', 'yamin', 'dviryamin', 'schrhnhi','false','some', 'some')")
     a = raw_input("continue? ('y' to proceed)")
 for row in c.execute("SELECT * FROM Users"):
-        print row
+    print row
 
 a = raw_input("save changes? ('y' to save)")
 if a == "y":

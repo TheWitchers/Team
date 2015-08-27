@@ -1,6 +1,8 @@
 __author__ = 'dvir'
 
-import socket, ssl
+import socket
+import ssl
+
 from dvir_methods_suggs import extract_inf
 
 bindsocket = socket.socket()
@@ -13,12 +15,14 @@ def do_something(connstream, data):
     connstream.write(extract_inf("username", "Users", data))
     return False
 
+
 def deal_with_client(connstream):
     data = connstream.read()
     while data:
         if not do_something(connstream, data):
             break
         data = connstream.read()
+
 
 while True:
     newsocket, fromaddr = bindsocket.accept()

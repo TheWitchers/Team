@@ -1,13 +1,16 @@
-import socket, ssl
+import socket
+import ssl
 
 bindsocket = socket.socket()
 bindsocket.bind(('127.0.0.1', 4567))
 bindsocket.listen(5)
 
+
 def do_something(connstream, data):
     print  data
     connstream.write(data)
     return False
+
 
 def deal_with_client(connstream):
     data = connstream.read()
@@ -15,6 +18,7 @@ def deal_with_client(connstream):
         if not do_something(connstream, data):
             break
         data = connstream.read()
+
 
 while True:
     newsocket, fromaddr = bindsocket.accept()

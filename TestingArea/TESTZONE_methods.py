@@ -35,8 +35,10 @@ def correct_user(id, pas):
     else:
         print "user does not exist"
 
-def has_inf(col,tbl,info):
-    if len(c.execute("SELECT '"+col+"' FROM Users WHERE username = '" + id + "' AND '"+col+"' = '" + info + "'")) > 0:
+
+def has_inf(col, tbl, info):
+    if len(c.execute(
+                                                                            "SELECT '" + col + "' FROM Users WHERE username = '" + id + "' AND '" + col + "' = '" + info + "'")) > 0:
         print col + "already exists"
     else:
         print col + " is OK"

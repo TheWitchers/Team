@@ -1,10 +1,11 @@
 __author__ = 'dvir'
 
-import socket, ssl, sqlite3
+import socket
+import ssl
+import sqlite3
 
 conn = sqlite3.connect("C:/Users/dvir/PycharmProjects/Team/DataBase/TeamDB.db")
 c = conn.cursor()
-
 
 bindsocket = socket.socket()
 bindsocket.bind(('127.0.0.1', 4567))

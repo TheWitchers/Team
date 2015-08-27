@@ -1,4 +1,6 @@
-import socket, ssl, pprint
+import socket
+import ssl
+import pprint
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -14,7 +16,7 @@ print pprint.pformat(ssl_sock.getpeercert())
 
 ssl_sock.write("boo!")
 print ssl_sock.read(1024)
-if False: # from the Python 2.7.3 docs
+if False:  # from the Python 2.7.3 docs
     # Set a simple HTTP request -- use httplib in actual code.
     ssl_sock.write("""GET / HTTP/1.0\r
     Host: www.verisign.com\n\n""")
