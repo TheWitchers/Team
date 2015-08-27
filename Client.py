@@ -37,6 +37,8 @@ def menu():
         login(ssl_sock,
               raw_input("Enter username: "),
               raw_input("Enter password: "))
+        global cookie
+        cookie = ssl_sock.read()
 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
