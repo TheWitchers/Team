@@ -51,14 +51,12 @@ print pprint.pformat(ssl_sock.getpeercert())
 
 # ssl_sock.write(raw_input("Enter username: "))
 menu()
+"""
 while True:
     a = ssl_sock.read()
     print a
-
-
-
-    if a != "":
+    if a == "":
         break
-
+"""
 ssl_sock.close()
-s.close()
+# s.close()

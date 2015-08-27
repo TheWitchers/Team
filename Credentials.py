@@ -47,7 +47,7 @@ def login_check(ssl_sock, info):
             # TODO: understand better what is session cookie and how to use it
             # TODO: instead of l[] (list), will be session cookie
             ssl_sock.write(
-                "Username: " + use + "\r\n" + "password: " + pas + "\r\n " + time.strftime("%d/%m/%Y %H:%M:%S"))
+                use + "\r\n" + pas + "\r\n " + time.strftime("%d/%m/%Y %H:%M:%S"))
     else:
         ssl_sock.write("103|902")
 
