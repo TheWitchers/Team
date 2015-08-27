@@ -1,8 +1,11 @@
 __author__ = 'dvir'
 
-import time, re
+import time
+import re
+import hashlib
 
 from dvir_methods_suggs import *
+
 
 
 
@@ -33,7 +36,7 @@ def login(ssl_sock, use, pas):
 
 # 103-server
 def login_check(ssl_sock, info):
-    b = re.split('[|]',info)
+    b = re.split('[|]', info)
     use = b[0]
     pas = b[1]
     if has_inf("username", use):
@@ -44,20 +47,19 @@ def login_check(ssl_sock, info):
             l.append(row[4])
             l.append(row[5])
         if len(l) > 0:
-            # TODO: understand better what is session cookie and how to use it
             # TODO: instead of l[] (list), will be session cookie
             ssl_sock.write(
-                use + "\r\n" + pas + "\r\n " + time.strftime("%d/%m/%Y %H:%M:%S"))
+                hashlib.sha1(use + "|" + pas + "|" + time.strftime("%d/%m/%Y %H:%M:%S").hexdigest()))
     else:
         ssl_sock.write("103|902")
 
 
 # 104-client
 def forgot_pas(ssl_sock, use):
-    ssl_sock.write([use, 104])
+    ssl_sock.write("104|" + use)
 
 
 # 105-server
 def ver_question(ssl_sock, use):
     q = c.execute("SELECT VerificationQuestion FROM Users WHERE username = '" + use + "'")
-    ssl_sock.write(q)
+    ssl_sock.write("105|" + use)
