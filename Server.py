@@ -39,13 +39,16 @@ def server(connection):
             mc, data = strip_message(data)
             funcs[mc_handling(mc)](connection, data)
         except:
+            pass
             print "Unexpected error:", sys.exc_info()[0]
             connection.close()
             # close_thread()
             break
+
 def main():
     threads = []
     while True:
         clienter = init()
-        threads.append(threading.Thread(target=server, args=(clienter.next())))
+        threads.append(threading.Thread(target=server, args=(clienter.next(),)))
         threads[-1].start()
+main()

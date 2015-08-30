@@ -48,6 +48,7 @@ def login_check(ssl_sock, info):
             l.append(row[5])
         if len(l) > 0:
             # TODO: instead of l[] (list), will be session cookie
+            #THE COOCKIE
             ssl_sock.write(
                 hashlib.sha1(use + "|" + pas + "|" + time.strftime("%d/%m/%Y %H:%M:%S").hexdigest()))
     else:
