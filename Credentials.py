@@ -50,7 +50,7 @@ def login_check(ssl_sock, info):
             # TODO: instead of l[] (list), will be session cookie
             #THE COOCKIE
             ssl_sock.write(
-                hashlib.sha1(use + "|" + pas + "|" + time.strftime("%d/%m/%Y %H:%M:%S").hexdigest()))
+                hashlib.sha1(use + "|" + pas + "|" + time.strftime("%d/%m/%Y %H:%M:%S")).hexdigest())
     else:
         ssl_sock.write("103|902")
 

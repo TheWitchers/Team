@@ -2,15 +2,25 @@ __author__ = 'yagel'
 
 
 class UserDetails:
-    def __init__(self, nickname, first_name, last_name, age, phone, email, birthdate, payment_info):
+    def __init__(self,id ,
+                 password,
+                 nickname,
+                 first_name,
+                 last_name,
+                 # age, phone,
+                 email,
+                 # birthdate,
+                 payment_info):
+        self.id = id
+        self.password=password
         self.nickname = nickname
         self.first_name = first_name
         self.last_name = last_name
-        self.age = age
-        self.phone = phone
         self.email = email
-        self.birthdate = birthdate
         self.payment_info = payment_info
+        # self.age = age
+        # self.phone = phone
+        # self.birthdate = birthdate
 
     def __repr__(self):
         # return """

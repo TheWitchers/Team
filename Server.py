@@ -1,10 +1,16 @@
 __author__ = 'yagel'
 
-from Credentials import *
-import re
-import socket, ssl, sys
+import socket
+import ssl
+import sys
 import threading
+
+from Credentials import *
 from utils import strip_message
+
+funcs = {"100": register, "101": register_check, "102": login, "103": login_check, "104": forgot_pas,
+         "105": ver_question}
+cookie = {}
 
 
 def init():
@@ -18,37 +24,50 @@ def init():
                                    certfile="C:\Users\dvir\PycharmProjects\Team\TestingArea\server.crt",
                                    keyfile="C:\Users\dvir\PycharmProjects\Team\TestingArea\server.key")
         yield ssl_sock
-#data = ssl_sock.read()
-
-# divides the data to message code and actual data
 
 
 def mc_handling(mc):
-    chain_func={"100":"101","102":"103"}
-    return chain_func[mc]
+    #
+    try:
+        chain_func = {"100": "101", "102": "103"}
+        if mc in chain_func:
+            return chain_func[mc]
+    except:
+        print "problam"
+
 
 def example(connection, data):
     pass
 
-funcs = {"100": register, "101": register_check, "102": login, "103": login_check, "104": forgot_pas, "105": ver_question}
 
 def server(connection):
     while True:
         try:
-            data = connection.recv(4096)
-            mc, data = strip_message(data)
-            funcs[mc_handling(mc)](connection, data)
+            data = connection.read()
+            print data
+            if data != '':
+                mc, data = strip_message(data)
+                funcs[mc_handling(mc)](connection, data)
+            elif data=='':
+                print "for fuck sake"
+                raise
         except:
-            pass
-            print "Unexpected error:", sys.exc_info()[0]
-            connection.close()
-            # close_thread()
+            if data == '':
+                print "the client connection has shut down"
+            #connection.close()
+            #threading.Thread.close_thread()
+
             break
+
 
 def main():
     threads = []
     while True:
         clienter = init()
-        threads.append(threading.Thread(target=server, args=(clienter.next(),)))
+        threads.append(threading.Thread(target=server,
+                                        args=(clienter.next(),)))
+
         threads[-1].start()
+
+
 main()

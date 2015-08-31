@@ -1,14 +1,14 @@
 __author__ = 'dvir'
 import sqlite3
 
-conn = sqlite3.connect("C:\Users\dvir\PycharmProjects\Team\DataBase\TeamDB.db")
+conn = sqlite3.connect("C:\Users\dvir\PycharmProjects\Team\DataBase\TeamDB.db",check_same_thread=False)
 c = conn.cursor()
 
 
 def has_inf(col, info):
     l = []
     for row in c.execute(
-                                                            "SELECT " + col + " FROM Users WHERE  " + col + " = '" + info + "'"):
+                         "SELECT " + col + " FROM Users WHERE  " + col + " = '" + info + "'"):
         l.append(row)
     if len(l) > 0:
 
