@@ -37,7 +37,6 @@ def menu():
         cookie = ssl_sock.recv(2048)
         print cookie
 
-
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ssl_sock = ssl.wrap_socket(s,
                            ca_certs="TestingArea\server.crt",
