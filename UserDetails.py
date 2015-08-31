@@ -2,22 +2,23 @@ __author__ = 'yagel'
 
 
 class UserDetails:
-    def __init__(self,id ,
-                 password,
-                 nickname,
+    def __init__(self,nickname,
+                 email,
                  first_name,
                  last_name,
-                 # age, phone,
-                 email,
-                 # birthdate,
-                 payment_info):
+                 id ,
+                 password,
+                 verQuestion,
+                 ans):
         self.id = id
         self.password=password
         self.nickname = nickname
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
-        self.payment_info = payment_info
+        self.verQuestion = verQuestion
+        self.ans = ans
+        # self.payment_info = payment_info
         # self.age = age
         # self.phone = phone
         # self.birthdate = birthdate

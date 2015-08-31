@@ -21,8 +21,8 @@ def init():
         newsocket, fromaddr = bindsocket.accept()
         ssl_sock = ssl.wrap_socket(newsocket,
                                    server_side=True,
-                                   certfile="C:\Users\dvir\PycharmProjects\Team\TestingArea\server.crt",
-                                   keyfile="C:\Users\dvir\PycharmProjects\Team\TestingArea\server.key")
+                                   certfile="TestingArea\server.crt",
+                                   keyfile="TestingArea\server.key")
         yield ssl_sock
 
 
@@ -32,6 +32,8 @@ def mc_handling(mc):
         chain_func = {"100": "101", "102": "103"}
         if mc in chain_func:
             return chain_func[mc]
+
+
     except:
         print "problam"
 
@@ -49,12 +51,12 @@ def server(connection):
                 mc, data = strip_message(data)
                 funcs[mc_handling(mc)](connection, data)
             elif data=='':
-                print "for fuck sake"
+
                 raise
         except:
             if data == '':
                 print "the client connection has shut down"
-            #connection.close()
+            connection.close()
             #threading.Thread.close_thread()
 
             break
