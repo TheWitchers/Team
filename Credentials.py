@@ -3,15 +3,17 @@ __author__ = 'dvir'
 import time
 import re
 import hashlib
+import UserDetails
 
 from dvir_methods_suggs import *
 
 
 
 
+
 # 100-client
 def register(ssl_sock, use, pas, email, fname, lname, nick, ver, ans):
-    l = use + "|" + pas + "|" + email + "|" + fname + "|" + lname + "|" + nick + "|" + ver + "|" + ans
+    l = nick + "|" + email + "|" + use + "|" + pas + "|" + fname + "|" + lname + "|" + ver + "|" + ans
     ssl_sock.write(l)
 
 
@@ -40,7 +42,7 @@ def login_check(ssl_sock, info):
     use = b[0]
     pas = b[1]
     if has_inf("username", use):
-        conn = sqlite3.connect("C:\Users\dvir\PycharmProjects\Team\DataBase\TeamDB.db")
+        conn = sqlite3.connect("DataBase\TeamDB.db")
         c = conn.cursor()
         l = []
         for row in c.execute("SELECT * FROM Users WHERE  username = '" + use + "' AND password = '" + pas + "'"):
@@ -48,12 +50,14 @@ def login_check(ssl_sock, info):
             l.append(row[5])
         if len(l) > 0:
             # TODO: instead of l[] (list), will be session cookie
-            #THE COOCKIE
-            cookie = hashlib.sha1(use + "|" + pas + "|" + time.strftime("%d/%m/%Y %H:%M:%S")).hexdigest()
-            ssl_sock.write(cookie)
+            # THE COOCKIE
+            decookie = hashlib.sha1(use + "|" + pas + "|" + time.strftime("%d/%m/%Y %H:%M:%S")).hexdigest()
+            ssl_sock.write(decookie)
+            return (decookie,use)
 
     else:
         ssl_sock.write("103|902")
+        return "902"
 
 
 # 104-client
