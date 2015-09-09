@@ -1,9 +1,8 @@
 __author__ = 'dvir'
 
 import time
-import re
 import hashlib
-import UserDetails
+
 
 from dvir_methods_suggs import *
 
@@ -13,32 +12,29 @@ from dvir_methods_suggs import *
 
 # 100-client
 def register(ssl_sock, use, pas, email, fname, lname, nick, ver, ans):
-    l = nick + "|" + email + "|" + use + "|" + pas + "|" + fname + "|" + lname + "|" + ver + "|" + ans
+    l ="100|"+ nick + "|" + email + "|" + fname + "|" + lname + "|" + use + "|" + pas + "|" + ver + "|" + ans
     ssl_sock.write(l)
 
 
 # 101-server
-def register_check(ssl_sock, ):
-    l = []
-    if not has_inf("username", l[0]) and not has_inf("email", l[2]) and not has_inf("nickname", l[5]):
-        c.execute(
-            "INSERT INTO Users VALUES ('" + l[5] + "','" + l[2] + "','" + l[3] + "','" + l[4] + "','" + l[0] + "','" +
-            l[1] + "', False,'" + l[6] + "','" + l[7] + "')")
-        ssl_sock.write(True)
-    else:
-        ssl_sock.write(False)
+def register_check(ssl_sock,reg_info ):
+    l = reg_info.split("|")
+    if not has_inf("username", l[5]) and not has_inf("email", l[1]) and not has_inf("nickname", l[0]):
 
+        ssl_sock.write("Register Success")
+        return "101",(True,l,)
+    else:
+        ssl_sock.write("Register Failed")
+        return "101",(False,)
 
 # 102-client
 def login(ssl_sock, use, pas):
-    # l = [102, use, pas]
-    # ssl_sock.write(l)
     ssl_sock.write("102|" + use + "|" + pas)
 
 
 # 103-server
 def login_check(ssl_sock, info):
-    b = re.split('[|]', info)
+    b = info.split("|")
     use = b[0]
     pas = b[1]
     if has_inf("username", use):
@@ -53,11 +49,11 @@ def login_check(ssl_sock, info):
             # THE COOCKIE
             decookie = hashlib.sha1(use + "|" + pas + "|" + time.strftime("%d/%m/%Y %H:%M:%S")).hexdigest()
             ssl_sock.write(decookie)
-            return (decookie,use)
+            return "103",(decookie,use)
 
     else:
-        ssl_sock.write("103|902")
-        return "902"
+        ssl_sock.write("902")
+        return "103",("902",)
 
 
 # 104-client

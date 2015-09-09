@@ -7,8 +7,7 @@ c = conn.cursor()
 
 def has_inf(col, info):
     l = []
-    for row in c.execute(
-                         "SELECT " + col + " FROM Users WHERE  " + col + " = '" + info + "'"):
+    for row in c.execute( "SELECT " + col + " FROM Users WHERE  " + col + " = '" + info + "'"):
         l.append(row)
     if len(l) > 0:
 
