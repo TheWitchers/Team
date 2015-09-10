@@ -3,11 +3,7 @@ __author__ = 'dvir'
 import time
 import hashlib
 
-
 from dvir_methods_suggs import *
-
-
-
 
 
 # 100-client
@@ -63,5 +59,18 @@ def forgot_pas(ssl_sock, use):
 
 # 105-server
 def ver_question(ssl_sock, use):
-    q = c.execute("SELECT VerificationQuestion FROM Users WHERE username = '" + use + "'")
-    ssl_sock.write("105|" + use)
+    c.execute("SELECT VerificationQuestion FROM Users WHERE username = '" + use + "'")
+    q = c.fetchone()[0]
+    ssl_sock.write(q)
+    lisen_ver_ans(ssl_sock,use)
+    return "105",use
+
+# 106-client
+def send_ver_ans(ssl_sock,ans):
+    ssl_sock.write(ans)
+
+# 107-server
+def lisen_ver_ans(ssl_sock, info):
+    ans=ssl_sock.read()
+    if c.execute("SELECT answer FROM Users WHERE username = '" + info + "'").fetchone()[0]==ans:
+        ssl_sock.write(c.execute("SELECT password FROM Users WHERE username = '" + info + "'").fetchone()[0])

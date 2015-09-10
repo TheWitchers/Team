@@ -8,12 +8,25 @@ from utils import strip_message
 from Credentials import *
 
 cookie=""
+def init():
+    global s
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    global ssl_sock
+    ssl_sock = ssl.wrap_socket(s,
+                               ca_certs="TestingArea\server.crt",
+                               cert_reqs=ssl.CERT_REQUIRED)
+    ssl_sock.connect(('127.0.0.1', 4567))
+
+    print repr(ssl_sock.getpeername())
+    print ssl_sock.cipher()
+    print pprint.pformat(ssl_sock.getpeercert())
 
 def menu():
     print ("What do you want to do?\n"
            "    \n"
            "    1. Register\n"
-           "    2. Login\n")
+           "    2. Login\n"
+           "    3. Forgot password")
 
     b = input()
     if b == 1:
@@ -29,12 +42,8 @@ def menu():
 
     elif b == 2:
         login(ssl_sock,
-              # raw_input("Enter username: "),
-              # raw_input("Enter password: "))
-              "dviryamin1",
-              "schrhnhi1")
-        print "ID: dviryamin\n" \
-              "Password: schrhnhi1"
+              raw_input("Enter username: "),
+              raw_input("Enter password: "))
         data = ssl_sock.recv(2048)
         if data != "902":
             cookie = data
@@ -44,19 +53,12 @@ def menu():
 
     elif b == 3:
         forgot_pas(ssl_sock,raw_input("Enter username: "))
+        quest = ssl_sock.read()
+        print quest
+        send_ver_ans(ssl_sock,(raw_input("Enter answer: ")))
+        pas = ssl_sock.read()
+        print pas
 
-def init():
-    global s
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    global ssl_sock
-    ssl_sock = ssl.wrap_socket(s,
-                               ca_certs="TestingArea\server.crt",
-                               cert_reqs=ssl.CERT_REQUIRED)
-    ssl_sock.connect(('127.0.0.1', 4567))
-
-    print repr(ssl_sock.getpeername())
-    print ssl_sock.cipher()
-    print pprint.pformat(ssl_sock.getpeercert())
 
 def client_adjustment(data):
         return strip_message(data)

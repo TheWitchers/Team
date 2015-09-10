@@ -14,7 +14,7 @@ func_rslt = ()
 conn = sqlite3.connect("DataBase\TeamDB.db", check_same_thread=False)
 c = conn.cursor()
 funcs = {"100": register, "101": register_check, "102": login, "103": login_check, "104": forgot_pas,
-         "105": ver_question}
+         "105": ver_question, lisen_ver_ans:"106"}
 cookie_dict = {}
 
 
@@ -33,7 +33,7 @@ def init():
 
 def mc_handling(mc):
     try:
-        chain_func = {"100": "101", "102": "103"}
+        chain_func = {"100": "101", "102": "103", "104": "105","106":"107"}
         if mc in chain_func:
             return chain_func[mc]
 
@@ -70,11 +70,9 @@ def server(connection):
         try:
             data = connection.read()
             print data
-            print "indic"
             if data != '':
                 mc, data = strip_message(data)
                 mc, func_rslt = funcs[mc_handling(mc)](connection, data)
-                print func_rslt
                 server_adjustments(mc, func_rslt)
 
             else:
@@ -87,8 +85,6 @@ def server(connection):
             if data == '':
                 print "the client connection has shut down"
             connection.close()
-            # threading.Thread.close_thread()
-
             break
 
 
