@@ -40,7 +40,6 @@ def mc_handling(mc):
     except:
         print "problam"
 
-
 def server_adjustments(mc, rslt_data):
     if mc == "103":
         if not rslt_data[0] == "902":
@@ -77,16 +76,14 @@ def server(connection):
 
             else:
                 print "indic 2"
-                # connection.close()
+                connection.close()
 
         except:
-            print "error"
             print sys.exc_info()[0]
             if data == '':
                 print "the client connection has shut down"
             connection.close()
             break
-
 
 def main():
     threads = []
