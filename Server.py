@@ -1,10 +1,10 @@
 __author__ = 'yagel'
-
+# mAES
 import socket
 import ssl
 import sys
 import threading
-import  UserDetails
+import UserDetails
 
 from Credentials import *
 from utils import strip_message
@@ -14,7 +14,7 @@ func_rslt = ()
 conn = sqlite3.connect("DataBase\TeamDB.db", check_same_thread=False)
 c = conn.cursor()
 funcs = {"100": register, "101": register_check, "102": login, "103": login_check, "104": forgot_pas,
-         "105": ver_question, lisen_ver_ans:"106"}
+         "105": ver_question, "106": lisen_ver_ans , "107": lisen_ver_ans}
 cookie_dict = {}
 
 
@@ -33,7 +33,7 @@ def init():
 
 def mc_handling(mc):
     try:
-        chain_func = {"100": "101", "102": "103", "104": "105","106":"107"}
+        chain_func = {"100": "101", "102": "103", "104": "105", "106":"107", "108":"109", "110":"111","112":"103"}
         if mc in chain_func:
             return chain_func[mc]
 
@@ -63,6 +63,9 @@ def server_adjustments(mc, rslt_data):
             conn.commit()
         elif rslt_data[0]==False:
             pass
+    elif mc == "111":
+        # cookie_dict[]
+        pass
 
 def server(connection):
     while True:
@@ -83,6 +86,7 @@ def server(connection):
             if data == '':
                 print "the client connection has shut down"
             connection.close()
+            print cookie_dict
             break
 
 def main():

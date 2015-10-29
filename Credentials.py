@@ -27,7 +27,6 @@ def register_check(ssl_sock,reg_info ):
 def login(ssl_sock, use, pas):
     ssl_sock.write("102|" + use + "|" + pas)
 
-
 # 103-server
 def login_check(ssl_sock, info):
     b = info.split("|")
@@ -62,15 +61,38 @@ def ver_question(ssl_sock, use):
     c.execute("SELECT VerificationQuestion FROM Users WHERE username = '" + use + "'")
     q = c.fetchone()[0]
     ssl_sock.write(q)
-    lisen_ver_ans(ssl_sock,use)
-    return "105",use
+    lisen_ver_ans(ssl_sock, use)
+    return "105", use
 
 # 106-client
-def send_ver_ans(ssl_sock,ans):
+def send_ver_ans(ssl_sock, ans):
     ssl_sock.write(ans)
 
 # 107-server
 def lisen_ver_ans(ssl_sock, info):
-    ans=ssl_sock.read()
-    if c.execute("SELECT answer FROM Users WHERE username = '" + info + "'").fetchone()[0]==ans:
+    ans = ssl_sock.read()
+    if c.execute("SELECT answer FROM Users WHERE username = '" + info + "'").fetchone()[0] == ans:
         ssl_sock.write(c.execute("SELECT password FROM Users WHERE username = '" + info + "'").fetchone()[0])
+
+# 108-client
+def info_req(ssl_sock, cookie):
+    ssl_sock.write("108|" + cookie)
+
+# 109-server
+def send_client_info(ssl_sock, ):
+    #TODO: what to do with connected users cookie
+    pass
+
+# 110-client
+def logout(ssl_sock, cookie):
+    ssl_sock.write("110|" + cookie )
+
+# 111-server
+def dc_user(ssl_sock, ):
+    # ssl_sock.write("111")
+    pass
+
+# 112-client
+def auto_login(ssl_sock,cookie):
+    ssl_sock.write("112|"+cookie)
+
