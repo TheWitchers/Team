@@ -7,7 +7,7 @@ import ssl
 from utils import strip_message
 from Credentials import *
 
-
+global cookie
 cookie = ""
 def init():
     global s
@@ -33,12 +33,23 @@ def creat_cookie_file(cookie):
 
 def login_menu():
     if os.path.exists("cookie.txt"):
-        file=open("cookie.txt",'r')
+        file = open("cookie.txt",'r')
         global cookie
         cookie = file.read()
         file.close()
 
-    while True:
+        auto_login(ssl_sock,cookie)
+        print "Waiting for server...\n"
+        data = ssl_sock.recv(2048)
+        print data
+        if data != "903":
+            print "Recognized cookie"
+            user_menu()
+        else:
+            print "Cookie is nor recognized"
+            cookie = ""
+
+    while cookie == "":
         print ("What do you want to do?\n"
                "    \n"
                "    1. Register\n"
@@ -87,7 +98,7 @@ def login_menu():
             print "Invalid input"
 
 def user_menu():
-    while cookie <> "":
+    while cookie != "":
         print ("What do you want to do?\n"
                "    \n"
                "    1. Show your account info\n"
