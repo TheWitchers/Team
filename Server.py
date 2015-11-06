@@ -14,7 +14,7 @@ func_rslt = ()
 conn = sqlite3.connect("DataBase\TeamDB.db", check_same_thread=False)
 c = conn.cursor()
 funcs = {"100": register, "101": register_check, "102": login, "103": login_check, "104": forgot_pas,
-         "105": ver_question, "106": lisen_ver_ans, "107": lisen_ver_ans, "113": auto_login_check}
+         "105": ver_question, "106": lisen_ver_ans, "107": lisen_ver_ans,"109":send_client_info, "113": auto_login_check}
 cookie_dict = {}
 
 
@@ -47,6 +47,8 @@ def server_adjustments_before(mc, recv_data):
             return "112", True
         else:
             return "112", False
+    elif mc == "108":
+        return "108", cookie_dict[recv_data]
     else:
         return mc,recv_data
 

@@ -43,7 +43,6 @@ def login_check(ssl_sock, info):
             l.append(row[4])
             l.append(row[5])
         if len(l) > 0:
-            # TODO: instead of l[] (list), will be session cookie
             # THE COOCKIE
             decookie = hashlib.sha1(use + "|" + pas + "|" + time.strftime("%d/%m/%Y %H:%M:%S")).hexdigest()
             ssl_sock.write(decookie)
@@ -86,9 +85,12 @@ def info_req(ssl_sock, cookie):
 
 
 # 109-server
-def send_client_info(ssl_sock, ):
-    # TODO: what to do with connected users cookie
-    pass
+def send_client_info(ssl_sock, info):
+    # conn = sqlite3.connect("DataBase\TeamDB.db")
+    # c = conn.cursor()
+    # info=c.execute("SELECT * FROM Users WHERE  username = '" + id+"'").fetchone()
+    ssl_sock.write(str(info))
+    return "109",info
 
 
 # 110-client

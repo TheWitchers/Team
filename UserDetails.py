@@ -46,5 +46,3 @@ class UserDetails:
                     self.email,
                     self.verQuestion ,
                     self.ans ))
-
-

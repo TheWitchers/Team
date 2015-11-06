@@ -71,8 +71,12 @@ def login_menu():
 
         elif b == 2:
             login(ssl_sock,
-                  raw_input("Enter username: "),
-                  raw_input("Enter password: "))
+                  # raw_input("Enter username: "),
+                  # raw_input("Enter password: "))
+                  "dviryamin1",
+                  "schrhnhi1")
+            print "dviryamin1" \
+                  "schrhnhi1"
             data = ssl_sock.recv(2048)
 
             if data != "902":
@@ -109,7 +113,8 @@ def user_menu():
         b = input()
 
         if b == 1:
-            info_req(ssl_sock, cookie)
+            info_req(ssl_sock,cookie)
+            print ssl_sock.read()
         elif b == 4:
             logout(ssl_sock, cookie)
             global cookie
